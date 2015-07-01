@@ -1,9 +1,9 @@
 {
-    "name": "mybuilder/when-i-work-library",
+    "name": "mybuilder/when-i-work-api",
     "description": "Library that support connections and retrieve data from WhenIWork.com API",
     "minimum-stability": "stable",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "PWalkow",
