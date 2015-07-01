@@ -3,7 +3,7 @@
     "description": "Library that support connections and retrieve data from WhenIWork.com API",
     "minimum-stability": "stable",
     "license": "MIT",
-    "version": "0.0.3",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "PWalkow",

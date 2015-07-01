@@ -1,9 +1,10 @@
 When I Work library
 =====================
 
-This library support connection and retrieve data from WhenIWork.com api.
+This library support connection and retrieve data from WhenIWork.com API.
 
-Convert a text string to a list of tags
+Docs:
+http://dev.wheniwork.com
 
 ```php
 $jmsSerializer = new JMS\Serializer\Serializer();
@@ -12,9 +13,13 @@ $whenIWorkApi = new WhenIWorkApi($client, 'your-developer-key', 'user-email', 'u
 $userRepository = new Repository\WhenIWorkUserRepository($whenIWorkApi, $jmsSerializer);
 ```
 
-List of all users
+List of all users:
 
 ```php
 $users = $userRepository->findAll();
 ```
 
+Todos:
+
+- Add more models that are supported via WhenIWork API
+- Add more functions that are supported via WhenIWork API
