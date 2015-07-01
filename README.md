@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mybuilder/when-i-work-library.svg?branch=master)](https://travis-ci.org/mybuilder/when-i-work-library)
+
 When I Work library
 =====================
 
