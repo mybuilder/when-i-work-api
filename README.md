@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mybuilder/when-i-work-api.svg?branch=master)](https://travis-ci.org/mybuilder/when-i-work-library)
+[![Build Status](https://travis-ci.org/mybuilder/when-i-work-api.svg?branch=master)](https://travis-ci.org/mybuilder/when-i-work-api)
 
 When I Work library
 =====================
