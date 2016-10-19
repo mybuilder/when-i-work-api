@@ -2,8 +2,8 @@
 
 namespace MyBuilder\Library\WhenIWork\Service;
 
-use Guzzle\Http\Client;
-use Guzzle\Http\Exception\ClientErrorResponseException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
 use Carbon\Carbon;
 use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 
@@ -171,14 +171,12 @@ class WhenIWorkApi
 
         try {
             $response = $this->client->get(
-                    self::WHEN_I_WORK_ENDPOINT . $entryPoint
-                )
-                ->addHeader('W-Token', $this->apiToken)
-                ->send();
+                self::WHEN_I_WORK_ENDPOINT . $entryPoint,
+                array('headers' => array('W-Token' => $this->apiToken))
+            );
 
-            return $response->json();
-
-        } catch (ClientErrorResponseException $e) {
+            return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        } catch (BadResponseException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -194,29 +192,23 @@ class WhenIWorkApi
             return;
         }
 
-        $params = array(
-            "username" => $this->email,
-            "password" => $this->password,
-        );
-
-        $headers = array(
-            'W-Key' => $this->developerKey
+        $options = array(
+            'headers' => array('W-Key' => $this->developerKey),
+            'json' => array("username" => $this->email, "password" => $this->password)
         );
 
         try {
-            $request = $this->client->post(
+            $response = $this->client->post(
                 self::WHEN_I_WORK_ENDPOINT . '/login',
-                $headers,
-                json_encode($params)
+                $options
             );
-            $response = $request->send();
-            $response = $response->json();
 
-        } catch (ClientErrorResponseException $e) {
+            $decodedResponse = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        } catch (BadResponseException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->apiToken = $response['login']['token'];
+        $this->apiToken = $decodedResponse['login']['token'];
     }
 
 }

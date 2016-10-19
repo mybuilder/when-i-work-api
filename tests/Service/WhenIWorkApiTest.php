@@ -2,8 +2,10 @@
 
 namespace MyBuilder\Library\WhenIWork\Tests\Service;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Psr7\Request;
 use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
-use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 
 /**
  * @group unit
@@ -32,8 +34,8 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = \Mockery::mock('Guzzle\Http\Message\Request');
-        $this->guzzleClient = \Mockery::mock('Guzzle\Http\Client');
+        $this->request = \Mockery::mock('GuzzleHttp\Psr7\Message\Request');
+        $this->guzzleClient = \Mockery::mock('GuzzleHttp\Client');
 
         $this->whenIWorkApi = new WhenIWorkApi(
             $this->guzzleClient,
@@ -44,16 +46,19 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException
+     * @expectedException \MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException
      */
     public function test_setup_and_exception_from_guzzle_client()
     {
         $this->guzzleClientShouldSetupToken();
 
         $this->guzzleClient->shouldReceive('get')
-            ->with(WhenIWorkApi::WHEN_I_WORK_ENDPOINT . '/users')
+            ->with(
+                WhenIWorkApi::WHEN_I_WORK_ENDPOINT . '/users',
+                array('headers' => array('W-Token' => self::TOKEN))
+            )
             ->once()
-            ->andThrow('Guzzle\Http\Exception\ClientErrorResponseException');
+            ->andThrow(new BadResponseException('', new Request('GET', 'foo')));
 
         $this->whenIWorkApi->usersListingUsers();
     }
@@ -64,15 +69,19 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('post')
             ->with(
                 WhenIWorkApi::WHEN_I_WORK_ENDPOINT . '/login',
-                array('W-Key' => self::DEVELOPER_KEY),
-                json_encode(
-                    array('username' => self::USERNAME, 'password' => self::PASSWORD)
+                array(
+                    'headers' => array('W-Key' => self::DEVELOPER_KEY),
+                    'json' => array('username' => self::USERNAME, 'password' => self::PASSWORD)
                 )
             )
             ->once()
             ->andReturn($this->request);
 
-        $this->request->shouldReceive('send')->atLeast(1)->andReturn($this->request);
-        $this->request->shouldReceive('json')->andReturn(array('login' => array('token' => self::TOKEN)));
+        $mockStream = \Mockery::mock('GuzzleHttp\Psr7\Stream');
+        $mockStream->shouldReceive('close')->once();
+        $mockStream->shouldReceive('getContents')->once()->andReturn('{"login":{"token":"someHiddenToken"}}');
+
+        $this->request->shouldReceive('getBody')->once()->andReturn($mockStream);
+        $this->request->shouldReceive('\GuzzleHttp\json_decode')->andReturn(array('login' => array('token' => self::TOKEN)));
     }
 }
