@@ -3,8 +3,8 @@
 namespace MyBuilder\Library\WhenIWork\Service;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\BadResponseException;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
 use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 
 class WhenIWorkApi
@@ -176,7 +176,7 @@ class WhenIWorkApi
             );
 
             return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        } catch (BadResponseException $e) {
+        } catch (GuzzleException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
     }
@@ -204,11 +204,10 @@ class WhenIWorkApi
             );
 
             $decodedResponse = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        } catch (BadResponseException $e) {
+        } catch (GuzzleException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
 
         $this->apiToken = $decodedResponse['login']['token'];
     }
-
 }
