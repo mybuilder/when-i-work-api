@@ -10,7 +10,7 @@ http://dev.wheniwork.com
 
 ```php
 $jmsSerializer = new JMS\Serializer\Serializer();
-$client = new Guzzle\Http\Client()
+$client = new GuzzleHttp\Client()
 $whenIWorkApi = new WhenIWorkApi($client, 'your-developer-key', 'user-email', 'user-password');
 $userRepository = new Repository\WhenIWorkUserRepository($whenIWorkApi, $jmsSerializer);
 ```
