@@ -68,6 +68,37 @@ class WhenIWorkApi
         return $this->fetchResourceForKey('/users/' . $id, 'user');
     }
 
+
+    // methods for 'payroll'
+
+    /**
+     * List payroll periods or find ones within a specified date range.
+     *
+     * If any part of a pay period is in the range given, it will be returned.
+     *
+     * @see http://dev.wheniwork.com/#listing-payrolls
+     *
+     * @param \DateTimeInterface|null $startDate Optional start date for searching
+     * @param \DateTimeInterface|null $endDate   Optional end date for searching
+     *
+     * @return array zero or more pay periods
+     */
+    public function payrollListingPayrolls(\DateTimeInterface $startDate = null, \DateTimeInterface $endDate = null)
+    {
+        $apiDates = [];
+        if ($startDate) {
+            $apiDates['start'] = $this->parseDateTimeToApiFormat($startDate);
+        }
+        if ($endDate) {
+            $apiDates['end'] = $this->parseDateTimeToApiFormat($endDate);
+        }
+
+        return $this->fetchResourceForKey(
+            '/payrolls/?' . http_build_query($apiDates),
+            'payrolls'
+        );
+    }
+
     // Methods for 'times'
 
     /**
