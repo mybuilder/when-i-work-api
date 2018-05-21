@@ -15,13 +15,13 @@ class PositionRepository extends WhenIWorkRepository
     {
         $position =  $this->whenIWorkApi->positionsGetExistingPosition($positionId);
 
-        return $this->deserializeModel($position, 'MyBuilder\Library\WhenIWork\Model\Position');
+        return $this->deserializeModel($position, Position::class);
     }
 
     /**
      * @return Position[]
      */
-    public function findAll()
+    public function findAll(): array
     {
         $positionsRaw  = $this->whenIWorkApi->positionsListingPositions();
 

@@ -3,7 +3,7 @@
 When I Work library
 =====================
 
-This library support connection and retrieve data from WhenIWork.com API.
+This library support connection and retrieval of data from WhenIWork.com API. PHP 7.1 required.
 
 Docs:
 http://dev.wheniwork.com

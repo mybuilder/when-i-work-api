@@ -5,6 +5,7 @@ namespace MyBuilder\Bundle\WhenIWorkBundle\Tests\Service\Repository;
 use JMS\Serializer\SerializerInterface;
 use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
 use MyBuilder\Library\WhenIWork\Repository\UserRepository;
+use MyBuilder\Library\WhenIWork\Repository\WhenIWorkRepository;
 
 /**
  * @group unit
@@ -28,8 +29,8 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->whenIWorkApi = \Mockery::mock('MyBuilder\Library\WhenIWork\Service\WhenIWorkApi');
-        $this->serializer = \Mockery::mock('JMS\Serializer\SerializerInterface');
+        $this->whenIWorkApi = \Mockery::mock(WhenIWorkApi::class);
+        $this->serializer = \Mockery::mock(SerializerInterface::class);
         $this->userRepository = new UserRepository(
             $this->whenIWorkApi,
             $this->serializer
@@ -37,7 +38,7 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function test_it_delegate_find_by_id_to_api()
+    public function test_it_delegate_find_by_id_to_api(): void
     {
         $user = \Mockery::mock('stdClass');
         $userRaw = \Mockery::mock('stdClass');
@@ -54,13 +55,13 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->userRepository->findById($someId);
     }
 
-    public function test_it_is_instance_of_when_i_work_repository()
+    public function test_it_is_instance_of_when_i_work_repository(): void
     {
-        $this->assertInstanceOf('MyBuilder\Library\WhenIWork\Repository\WhenIWorkRepository', $this->userRepository);
+        $this->assertInstanceOf(WhenIWorkRepository::class, $this->userRepository);
     }
 
 
-    public function test_it_delegate_find_all_to_api()
+    public function test_it_delegate_find_all_to_api(): void
     {
         $this->whenIWorkApi
             ->shouldReceive('usersListingUsers')
