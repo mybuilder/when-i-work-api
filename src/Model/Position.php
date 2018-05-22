@@ -2,6 +2,7 @@
 
 namespace MyBuilder\Library\WhenIWork\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\SerializedName;
@@ -37,14 +38,14 @@ class Position
     private $color;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("created_at")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("updated_at")
      */
@@ -55,7 +56,7 @@ class Position
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -65,7 +66,7 @@ class Position
      *
      * @param int $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -75,7 +76,7 @@ class Position
      *
      * @return int
      */
-    public function getAccountId()
+    public function getAccountId(): int
     {
         return $this->accountId;
     }
@@ -85,7 +86,7 @@ class Position
      *
      * @param int $accountId
      */
-    public function setAccountId($accountId)
+    public function setAccountId($accountId): void
     {
         $this->accountId = $accountId;
     }
@@ -95,7 +96,7 @@ class Position
      *
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -105,7 +106,7 @@ class Position
      *
      * @param string $name
      */
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -115,7 +116,7 @@ class Position
      *
      * @return string
      */
-    public function getColor()
+    public function getColor(): string
     {
         return $this->color;
     }
@@ -125,7 +126,7 @@ class Position
      *
      * @param string $color
      */
-    public function setColor($color)
+    public function setColor($color): void
     {
         $this->color = $color;
     }
@@ -133,9 +134,9 @@ class Position
     /**
      * CreatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -143,9 +144,9 @@ class Position
     /**
      * CreatedAt
      *
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -153,9 +154,9 @@ class Position
     /**
      * UpdatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -163,13 +164,10 @@ class Position
     /**
      * UpdatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
-
-
-
 }

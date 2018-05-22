@@ -15,7 +15,7 @@ class TimeRepository extends WhenIWorkRepository
     {
         $time =  $this->whenIWorkApi->timesGetExistingTime($timeId);
 
-        return $this->deserializeModel($time, 'MyBuilder\Library\WhenIWork\Model\Time');
+        return $this->deserializeModel($time, Time::class);
     }
 
     /**
@@ -28,7 +28,7 @@ class TimeRepository extends WhenIWorkRepository
     {
         $timesRaw  = $this->whenIWorkApi->timesListingTimes($startDate, $endDate);
 
-        return $this->deserializeModel($timesRaw, 'ArrayCollection<MyBuilder\Library\WhenIWork\Model\Time>');
+        return $this->deserializeModel($timesRaw, 'ArrayCollection<'. Time::class .'>');
     }
 
     /**
@@ -42,7 +42,7 @@ class TimeRepository extends WhenIWorkRepository
     {
         $timesRaw = $this->whenIWorkApi->timesGetUserTimes($userId, $startDate, $endDate);
 
-        return $this->deserializeModel($timesRaw, 'ArrayCollection<MyBuilder\Library\WhenIWork\Model\Time>');
+        return $this->deserializeModel($timesRaw, 'ArrayCollection<'. Time::class .'>');
     }
 
 }

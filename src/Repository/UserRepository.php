@@ -15,7 +15,7 @@ class UserRepository extends WhenIWorkRepository
     {
         $user =  $this->whenIWorkApi->usersGetExistingUser($id);
 
-        return $this->deserializeModel($user, 'MyBuilder\Library\WhenIWork\Model\User');
+        return $this->deserializeModel($user, User::class);
     }
 
     /**
@@ -25,7 +25,7 @@ class UserRepository extends WhenIWorkRepository
     {
         $usersRaw  = $this->whenIWorkApi->usersListingUsers();
 
-        return $this->deserializeModel($usersRaw, 'ArrayCollection<MyBuilder\Library\WhenIWork\Model\User>');
+        return $this->deserializeModel($usersRaw, 'ArrayCollection<'. User::class .'>');
     }
 
 }

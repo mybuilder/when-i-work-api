@@ -2,20 +2,25 @@
 
 namespace MyBuilder\Library\WhenIWork\Tests\Service;
 
+use DateTime;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
+use Mockery;
+use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
+use GuzzleHttp\Psr7\Stream;
 
 /**
  * @group unit
+ * @coversDefaultClass \MyBuilder\Library\WhenIWork\Service\WhenIWorkApi
  */
 class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
 {
-    const DEVELOPER_KEY = '12345';
-    const USERNAME  = 'test@test.test';
-    const PASSWORD = 'heavypass';
-    const TOKEN = 'someHiddenToken';
+    private const DEVELOPER_KEY = '12345';
+    private const USERNAME  = 'test@test.test';
+    private const PASSWORD = 'heavypass';
+    private const TOKEN = 'someHiddenToken';
 
     /**
      * @var WhenIWorkApi
@@ -34,8 +39,8 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->request = \Mockery::mock('GuzzleHttp\Psr7\Message\Request');
-        $this->guzzleClient = \Mockery::mock('GuzzleHttp\Client');
+        $this->request = Mockery::mock('GuzzleHttp\Psr7\Message\Request');
+        $this->guzzleClient = Mockery::mock(Client::class);
 
         $this->whenIWorkApi = new WhenIWorkApi(
             $this->guzzleClient,
@@ -45,10 +50,7 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @expectedException \MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException
-     */
-    public function test_setup_and_exception_from_guzzle_client()
+    public function test_setup_and_exception_from_guzzle_client(): void
     {
         $this->guzzleClientShouldSetupToken();
 
@@ -60,10 +62,45 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andThrow(new BadResponseException('', new Request('GET', 'foo')));
 
+        $this->expectException(WhenIWorkApiException::class);
         $this->whenIWorkApi->usersListingUsers();
     }
 
-    private function guzzleClientShouldSetupToken()
+    /**
+     * Are the dates in the URLs being created OK?
+     *
+     * @covers ::parseDateTimeToApiFormat()
+     * @covers ::timesListingTimes()
+     * @covers ::payrollListingPayrolls()
+     * @covers ::timesGetUserTimes()
+     */
+    public function test_it_gets_dates_for_the_api_in_correct_format()
+    {
+        $whenIWorkApiTest = new class($this->guzzleClient, '', '', '') extends WhenIWorkApi {
+            public $urlVisited;
+
+            protected function fetchResourceForKey($entryPoint, $valueKey)
+            {
+                $this->urlVisited = $entryPoint;
+
+                return [];
+            }
+        };
+
+        $startDate = new DateTime('2018-01-01 12:34');
+        $endDate = new DateTime('2018-01-31 23:45');
+
+        $whenIWorkApiTest->timesListingTimes($startDate, $endDate);
+        $this->assertSame('/times/?start=2018-01-01&end=2018-01-31', $whenIWorkApiTest->urlVisited);
+
+        $whenIWorkApiTest->payrollListingPayrolls($startDate, $endDate);
+        $this->assertSame('/payrolls/?start=2018-01-01&end=2018-01-31', $whenIWorkApiTest->urlVisited);
+
+        $whenIWorkApiTest->timesGetUserTimes(123, $startDate, $endDate);
+        $this->assertSame('/times/user/123?start=2018-01-01&end=2018-01-31', $whenIWorkApiTest->urlVisited);
+    }
+
+    private function guzzleClientShouldSetupToken(): void
     {
         $this->guzzleClient
             ->shouldReceive('post')
@@ -77,7 +114,7 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
             ->once()
             ->andReturn($this->request);
 
-        $mockStream = \Mockery::mock('GuzzleHttp\Psr7\Stream');
+        $mockStream = Mockery::mock(Stream::class);
         $mockStream->shouldReceive('close')->once();
         $mockStream->shouldReceive('getContents')->once()->andReturn('{"login":{"token":"someHiddenToken"}}');
 

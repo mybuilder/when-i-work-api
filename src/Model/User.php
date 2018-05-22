@@ -49,7 +49,7 @@ class User
      * @Type("double")
      * @SerializedName("hours_preferred")
      */
-    private $hoursPreffered;
+    private $hoursPreferred;
 
     /**
      * @var float
@@ -106,7 +106,7 @@ class User
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -116,7 +116,7 @@ class User
      *
      * @param int $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -126,7 +126,7 @@ class User
      *
      * @return string
      */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
@@ -136,7 +136,7 @@ class User
      *
      * @param string $firstName
      */
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -146,7 +146,7 @@ class User
      *
      * @return string
      */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
@@ -156,7 +156,7 @@ class User
      *
      * @param string $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName($lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -166,7 +166,7 @@ class User
      *
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -176,7 +176,7 @@ class User
      *
      * @param string $email
      */
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -186,7 +186,7 @@ class User
      *
      * @return string
      */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
@@ -196,29 +196,53 @@ class User
      *
      * @param string $phoneNumber
      */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber($phoneNumber): void
     {
         $this->phoneNumber = $phoneNumber;
     }
 
     /**
-     * HoursPreffered
+     * HoursPreferred
      *
      * @return float
      */
-    public function getHoursPreffered()
+    public function getHoursPreferred(): float
     {
-        return $this->hoursPreffered;
+        return $this->hoursPreferred;
+    }
+
+    /**
+     * HoursPreferred
+     *
+     * @param float $hoursPreferred
+     */
+    public function setHoursPreferred($hoursPreferred): void
+    {
+        $this->hoursPreferred = $hoursPreferred;
+    }
+
+
+    /**
+     * HoursPreffered
+     *
+     * @deprecated use getHoursPreferred
+     * @return float
+     */
+    public function getHoursPreffered(): float
+    {
+        return $this->getHoursPreferred();
     }
 
     /**
      * HoursPreffered
      *
-     * @param float $hoursPreffered
+     * @deprecated use setHoursPreferred
+     *
+     * @param float $hoursPreferred
      */
-    public function setHoursPreffered($hoursPreffered)
+    public function setHoursPreffered($hoursPreferred): void
     {
-        $this->hoursPreffered = $hoursPreffered;
+        $this->setHoursPreferred($hoursPreferred);
     }
 
     /**
@@ -226,9 +250,9 @@ class User
      *
      * @return float
      */
-    public function getHoursMax()
+    public function getHoursMax(): float
     {
-        return $this->hoursMax;
+        return $this->hoursMax ? 0.0;
     }
 
     /**
@@ -236,7 +260,7 @@ class User
      *
      * @param float $hoursMax
      */
-    public function setHoursMax($hoursMax)
+    public function setHoursMax($hoursMax): void
     {
         $this->hoursMax = $hoursMax;
     }
@@ -246,7 +270,7 @@ class User
      *
      * @return float
      */
-    public function getHourlyRate()
+    public function getHourlyRate(): float
     {
         return $this->hourlyRate;
     }
@@ -256,7 +280,7 @@ class User
      *
      * @param float $hourlyRate
      */
-    public function setHourlyRate($hourlyRate)
+    public function setHourlyRate($hourlyRate): void
     {
         $this->hourlyRate = $hourlyRate;
     }
@@ -266,7 +290,7 @@ class User
      *
      * @return int
      */
-    public function getRole()
+    public function getRole(): int
     {
         return $this->role;
     }
@@ -276,7 +300,7 @@ class User
      *
      * @param int $role
      */
-    public function setRole($role)
+    public function setRole($role): void
     {
         $this->role = $role;
     }
@@ -286,7 +310,7 @@ class User
      *
      * @return \int[]
      */
-    public function getPositions()
+    public function getPositions(): array
     {
         return $this->positions;
     }
@@ -296,7 +320,7 @@ class User
      *
      * @param \int[] $positions
      */
-    public function setPositions($positions)
+    public function setPositions($positions): void
     {
         $this->positions = $positions;
     }
@@ -306,9 +330,9 @@ class User
      *
      * @return \int[]
      */
-    public function getLocations()
+    public function getLocations(): array
     {
-        return $this->locations;
+        return $this->locations ?? [];
     }
 
     /**
@@ -316,7 +340,7 @@ class User
      *
      * @param \int[] $locations
      */
-    public function setLocations($locations)
+    public function setLocations($locations): void
     {
         $this->locations = $locations;
     }
@@ -326,9 +350,9 @@ class User
      *
      * @return string
      */
-    public function getNotes()
+    public function getNotes(): string
     {
-        return $this->notes;
+        return $this->notes ?? '';
     }
 
     /**
@@ -336,7 +360,7 @@ class User
      *
      * @param string $notes
      */
-    public function setNotes($notes)
+    public function setNotes($notes): void
     {
         $this->notes = $notes;
     }
@@ -346,7 +370,7 @@ class User
      *
      * @return boolean
      */
-    public function getActivated()
+    public function getActivated(): bool
     {
         return $this->activated;
     }
@@ -356,7 +380,7 @@ class User
      *
      * @param boolean $activated
      */
-    public function setActivated($activated)
+    public function setActivated($activated): void
     {
         $this->activated = $activated;
     }
@@ -366,7 +390,7 @@ class User
      *
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -376,9 +400,8 @@ class User
      *
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->password = $password;
     }
-
 }

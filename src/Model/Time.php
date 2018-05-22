@@ -2,6 +2,7 @@
 
 namespace MyBuilder\Library\WhenIWork\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\SerializedName;
@@ -67,14 +68,14 @@ class Time
     private $shiftId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("start_time")
      */
     private $startTime;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("end_time")
      */
@@ -122,14 +123,14 @@ class Time
     private $modifiedBy;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("updated_at")
      */
     private $updatedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("created_at")
      */
@@ -140,7 +141,7 @@ class Time
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -150,7 +151,7 @@ class Time
      *
      * @param int $id
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -160,7 +161,7 @@ class Time
      *
      * @return int
      */
-    public function getAccountId()
+    public function getAccountId(): int
     {
         return $this->accountId;
     }
@@ -170,7 +171,7 @@ class Time
      *
      * @param int $accountId
      */
-    public function setAccountId($accountId)
+    public function setAccountId($accountId): void
     {
         $this->accountId = $accountId;
     }
@@ -180,7 +181,7 @@ class Time
      *
      * @return int
      */
-    public function getUserId()
+    public function getUserId(): int
     {
         return $this->userId;
     }
@@ -190,7 +191,7 @@ class Time
      *
      * @param int $userId
      */
-    public function setUserId($userId)
+    public function setUserId($userId): void
     {
         $this->userId = $userId;
     }
@@ -200,7 +201,7 @@ class Time
      *
      * @return int
      */
-    public function getCreatorId()
+    public function getCreatorId(): int
     {
         return $this->creatorId;
     }
@@ -210,7 +211,7 @@ class Time
      *
      * @param int $creatorId
      */
-    public function setCreatorId($creatorId)
+    public function setCreatorId($creatorId): void
     {
         $this->creatorId = $creatorId;
     }
@@ -220,7 +221,7 @@ class Time
      *
      * @return int
      */
-    public function getPositionId()
+    public function getPositionId(): int
     {
         return $this->positionId;
     }
@@ -230,7 +231,7 @@ class Time
      *
      * @param int $positionId
      */
-    public function setPositionId($positionId)
+    public function setPositionId($positionId): void
     {
         $this->positionId = $positionId;
     }
@@ -240,7 +241,7 @@ class Time
      *
      * @return int
      */
-    public function getLocationId()
+    public function getLocationId(): int
     {
         return $this->locationId;
     }
@@ -250,7 +251,7 @@ class Time
      *
      * @param int $locationId
      */
-    public function setLocationId($locationId)
+    public function setLocationId($locationId): void
     {
         $this->locationId = $locationId;
     }
@@ -260,7 +261,7 @@ class Time
      *
      * @return int
      */
-    public function getSiteId()
+    public function getSiteId(): int
     {
         return $this->siteId;
     }
@@ -270,7 +271,7 @@ class Time
      *
      * @param int $siteId
      */
-    public function setSiteId($siteId)
+    public function setSiteId($siteId): void
     {
         $this->siteId = $siteId;
     }
@@ -280,7 +281,7 @@ class Time
      *
      * @return int
      */
-    public function getShiftId()
+    public function getShiftId(): int
     {
         return $this->shiftId;
     }
@@ -290,7 +291,7 @@ class Time
      *
      * @param int $shiftId
      */
-    public function setShiftId($shiftId)
+    public function setShiftId($shiftId): void
     {
         $this->shiftId = $shiftId;
     }
@@ -298,9 +299,9 @@ class Time
     /**
      * StartTime
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getStartTime()
+    public function getStartTime(): DateTime
     {
         return $this->startTime;
     }
@@ -308,9 +309,9 @@ class Time
     /**
      * StartTime
      *
-     * @param \DateTime $startTime
+     * @param DateTime $startTime
      */
-    public function setStartTime($startTime)
+    public function setStartTime($startTime): void
     {
         $this->startTime = $startTime;
     }
@@ -318,9 +319,9 @@ class Time
     /**
      * EndTime
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getEndTime()
+    public function getEndTime(): DateTime
     {
         return $this->endTime;
     }
@@ -328,9 +329,9 @@ class Time
     /**
      * EndTime
      *
-     * @param \DateTime $endTime
+     * @param DateTime $endTime
      */
-    public function setEndTime($endTime)
+    public function setEndTime($endTime): void
     {
         $this->endTime = $endTime;
     }
@@ -340,7 +341,7 @@ class Time
      *
      * @return float
      */
-    public function getLength()
+    public function getLength(): float
     {
         return $this->length;
     }
@@ -350,7 +351,7 @@ class Time
      *
      * @param float $length
      */
-    public function setLength($length)
+    public function setLength($length): void
     {
         $this->length = $length;
     }
@@ -360,7 +361,7 @@ class Time
      *
      * @return float
      */
-    public function getHourlyRate()
+    public function getHourlyRate(): float
     {
         return $this->hourlyRate;
     }
@@ -370,7 +371,7 @@ class Time
      *
      * @param float $hourlyRate
      */
-    public function setHourlyRate($hourlyRate)
+    public function setHourlyRate($hourlyRate): void
     {
         $this->hourlyRate = $hourlyRate;
     }
@@ -380,9 +381,9 @@ class Time
      *
      * @return boolean
      */
-    public function getIsAlerted()
+    public function getIsAlerted(): bool
     {
-        return $this->isAlerted;
+        return $this->isAlerted ?? false;
     }
 
     /**
@@ -390,7 +391,7 @@ class Time
      *
      * @param boolean $isAlerted
      */
-    public function setIsAlerted($isAlerted)
+    public function setIsAlerted($isAlerted): void
     {
         $this->isAlerted = $isAlerted;
     }
@@ -400,7 +401,7 @@ class Time
      *
      * @return int
      */
-    public function getAlertType()
+    public function getAlertType(): int
     {
         return $this->alertType;
     }
@@ -410,7 +411,7 @@ class Time
      *
      * @param int $alertType
      */
-    public function setAlertType($alertType)
+    public function setAlertType($alertType): void
     {
         $this->alertType = $alertType;
     }
@@ -420,7 +421,7 @@ class Time
      *
      * @return boolean
      */
-    public function getIsApproved()
+    public function getIsApproved(): bool
     {
         return $this->isApproved;
     }
@@ -430,7 +431,7 @@ class Time
      *
      * @param boolean $isApproved
      */
-    public function setIsApproved($isApproved)
+    public function setIsApproved($isApproved): void
     {
         $this->isApproved = $isApproved;
     }
@@ -440,7 +441,7 @@ class Time
      *
      * @return int
      */
-    public function getModifiedBy()
+    public function getModifiedBy(): int
     {
         return $this->modifiedBy;
     }
@@ -450,7 +451,7 @@ class Time
      *
      * @param int $modifiedBy
      */
-    public function setModifiedBy($modifiedBy)
+    public function setModifiedBy($modifiedBy): void
     {
         $this->modifiedBy = $modifiedBy;
     }
@@ -458,9 +459,9 @@ class Time
     /**
      * UpdatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -468,9 +469,9 @@ class Time
     /**
      * UpdatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
@@ -478,9 +479,9 @@ class Time
     /**
      * CreatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -488,9 +489,9 @@ class Time
     /**
      * CreatedAt
      *
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
     }

@@ -2,19 +2,20 @@
 
 namespace MyBuilder\Library\WhenIWork\Service;
 
+use DateTime;
 use GuzzleHttp\Client;
-use Carbon\Carbon;
 use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
 use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 
 class WhenIWorkApi
 {
-    const WHEN_I_WORK_ENDPOINT = 'https://api.wheniwork.com/2';
+    public const WHEN_I_WORK_ENDPOINT = 'https://api.wheniwork.com/2';
 
     /**
      * Used to query API by date
      */
-    const WHEN_I_WORK_TIME_FORMAT  = 'Y-m-d';
+    public const WHEN_I_WORK_TIME_FORMAT  = 'Y-m-d';
 
     private $developerKey;
 
@@ -78,12 +79,12 @@ class WhenIWorkApi
      *
      * @see http://dev.wheniwork.com/#listing-payrolls
      *
-     * @param \DateTimeInterface|null $startDate Optional start date for searching
-     * @param \DateTimeInterface|null $endDate   Optional end date for searching
+     * @param DateTime|null $startDate Optional start date for searching
+     * @param DateTime|null $endDate   Optional end date for searching
      *
      * @return array zero or more pay periods
      */
-    public function payrollListingPayrolls(\DateTimeInterface $startDate = null, \DateTimeInterface $endDate = null)
+    public function payrollListingPayrolls(DateTime $startDate = null, DateTime $endDate = null)
     {
         $apiDates = [];
         if ($startDate) {
@@ -102,19 +103,21 @@ class WhenIWorkApi
     // Methods for 'times'
 
     /**
-     * @param \DateTime $startDate
-     * @param \DateTime $endDate
+     * @param DateTime $startDate required
+     * @param DateTime $endDate   required
      *
      * @return array
      * @throws WhenIWorkApiException
      */
-    public function timesListingTimes(\DateTime $startDate, \DateTime $endDate)
+    public function timesListingTimes(DateTime $startDate, DateTime $endDate)
     {
-        $startDate = $this->parseDateTimeToApiFormat($startDate);
-        $endDate = $this->parseDateTimeToApiFormat($endDate);
+        $apiDates = [
+            'start' => $this->parseDateTimeToApiFormat($startDate),
+            'end' => $this->parseDateTimeToApiFormat($endDate),
+        ];
 
         return $this->fetchResourceForKey(
-            '/times/?start= '. $startDate . '&end= '. $endDate,
+            '/times/?'. http_build_query($apiDates),
             'times'
         );
     }
@@ -131,11 +134,13 @@ class WhenIWorkApi
      */
     public function timesGetUserTimes($userId, $startDate, $endDate)
     {
-        $startDate = $this->parseDateTimeToApiFormat($startDate);
-        $endDate = $this->parseDateTimeToApiFormat($endDate);
+        $apiDates = [
+            'start' => $this->parseDateTimeToApiFormat($startDate),
+            'end' => $this->parseDateTimeToApiFormat($endDate),
+        ];
 
         return $this->fetchResourceForKey(
-            '/times/user/' . $userId . '/?start='. $startDate . '&end='. $endDate,
+            '/times/user/' . $userId . '?' . http_build_query($apiDates),
             'times'
         );
     }
@@ -184,12 +189,12 @@ class WhenIWorkApi
 
     // private methods and utils
 
-    private function parseDateTimeToApiFormat(\DateTime $dateTime)
+    private function parseDateTimeToApiFormat(DateTime $dateTime)
     {
-        return Carbon::instance($dateTime)->format(self::WHEN_I_WORK_TIME_FORMAT);
+        return $dateTime->format(self::WHEN_I_WORK_TIME_FORMAT);
     }
 
-    private function fetchResourceForKey($entryPoint, $valueKey)
+    protected function fetchResourceForKey($entryPoint, $valueKey)
     {
         $response = $this->get($entryPoint);
 
@@ -225,7 +230,7 @@ class WhenIWorkApi
 
         $options = array(
             'headers' => array('W-Key' => $this->developerKey),
-            'json' => array("username" => $this->email, "password" => $this->password)
+            'json' => array('username' => $this->email, 'password' => $this->password)
         );
 
         try {
@@ -235,7 +240,7 @@ class WhenIWorkApi
             );
 
             $decodedResponse = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        } catch (GuzzleException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
 
