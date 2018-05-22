@@ -15,11 +15,19 @@ $whenIWorkApi = new WhenIWorkApi($client, 'your-developer-key', 'user-email', 'u
 $userRepository = new Repository\WhenIWorkUserRepository($whenIWorkApi, $jmsSerializer);
 ```
 
-List of all users:
+### List of all users:
 
 ```php
 $users = $userRepository->findAll();
 ```
+
+### List of all payroll periods:
+
+```php
+$payrolls = $payrollRepository->findAll();
+```
+
+
 
 Todos:
 

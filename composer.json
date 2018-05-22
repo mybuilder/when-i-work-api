@@ -3,7 +3,7 @@
     "description": "Library that support connections and retrieve data from WhenIWork.com API",
     "minimum-stability": "stable",
     "license": "MIT",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "require": {
         "php": ">=7.1",
         "jms/serializer": "~1.1",
