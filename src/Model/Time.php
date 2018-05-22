@@ -321,7 +321,7 @@ class Time
      *
      * @return DateTime
      */
-    public function getEndTime(): DateTime
+    public function getEndTime(): ?DateTime
     {
         return $this->endTime;
     }
