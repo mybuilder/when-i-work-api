@@ -252,7 +252,7 @@ class User
      */
     public function getHoursMax(): float
     {
-        return $this->hoursMax ? 0.0;
+        return $this->hoursMax ?? 0.0;
     }
 
     /**
