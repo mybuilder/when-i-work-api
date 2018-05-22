@@ -16,7 +16,7 @@ class PayrollRepository extends WhenIWorkRepository
     {
         $payroll =  $this->whenIWorkApi->timesGetExistingTime($payrollId);
 
-        return $this->deserializeModel($payroll, 'MyBuilder\Library\WhenIWork\Model\Payroll');
+        return $this->deserializeModel($payroll, Payroll::class);
     }
 
     /**
