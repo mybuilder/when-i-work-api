@@ -5,6 +5,7 @@ namespace MyBuilder\Library\WhenIWork\Service;
 use DateTime;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
 use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 
 class WhenIWorkApi
@@ -239,7 +240,7 @@ class WhenIWorkApi
             );
 
             $decodedResponse = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-        } catch (GuzzleException $e) {
+        } catch (InvalidArgumentException $e) {
             throw new WhenIWorkApiException($e->getMessage(), $e->getCode(), $e);
         }
 

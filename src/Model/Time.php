@@ -2,6 +2,7 @@
 
 namespace MyBuilder\Library\WhenIWork\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\SerializedName;
@@ -67,14 +68,14 @@ class Time
     private $shiftId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("start_time")
      */
     private $startTime;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("end_time")
      */
@@ -122,14 +123,14 @@ class Time
     private $modifiedBy;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("updated_at")
      */
     private $updatedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("created_at")
      */
@@ -298,9 +299,9 @@ class Time
     /**
      * StartTime
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getStartTime(): \DateTime
+    public function getStartTime(): DateTime
     {
         return $this->startTime;
     }
@@ -308,7 +309,7 @@ class Time
     /**
      * StartTime
      *
-     * @param \DateTime $startTime
+     * @param DateTime $startTime
      */
     public function setStartTime($startTime): void
     {
@@ -318,9 +319,9 @@ class Time
     /**
      * EndTime
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getEndTime(): \DateTime
+    public function getEndTime(): DateTime
     {
         return $this->endTime;
     }
@@ -328,7 +329,7 @@ class Time
     /**
      * EndTime
      *
-     * @param \DateTime $endTime
+     * @param DateTime $endTime
      */
     public function setEndTime($endTime): void
     {
@@ -382,7 +383,7 @@ class Time
      */
     public function getIsAlerted(): bool
     {
-        return $this->isAlerted;
+        return $this->isAlerted ?? false;
     }
 
     /**
@@ -458,9 +459,9 @@ class Time
     /**
      * UpdatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -468,7 +469,7 @@ class Time
     /**
      * UpdatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
     public function setUpdatedAt($updatedAt): void
     {
@@ -478,9 +479,9 @@ class Time
     /**
      * CreatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -488,7 +489,7 @@ class Time
     /**
      * CreatedAt
      *
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
     public function setCreatedAt($createdAt): void
     {

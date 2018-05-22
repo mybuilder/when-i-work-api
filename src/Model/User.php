@@ -49,7 +49,7 @@ class User
      * @Type("double")
      * @SerializedName("hours_preferred")
      */
-    private $hoursPreffered;
+    private $hoursPreferred;
 
     /**
      * @var float
@@ -202,23 +202,47 @@ class User
     }
 
     /**
+     * HoursPreferred
+     *
+     * @return float
+     */
+    public function getHoursPreferred(): float
+    {
+        return $this->hoursPreferred;
+    }
+
+    /**
+     * HoursPreferred
+     *
+     * @param float $hoursPreferred
+     */
+    public function setHoursPreferred($hoursPreferred): void
+    {
+        $this->hoursPreferred = $hoursPreferred;
+    }
+
+
+    /**
      * HoursPreffered
      *
+     * @deprecated use getHoursPreferred
      * @return float
      */
     public function getHoursPreffered(): float
     {
-        return $this->hoursPreffered;
+        return $this->getHoursPreferred();
     }
 
     /**
      * HoursPreffered
      *
-     * @param float $hoursPreffered
+     * @deprecated use setHoursPreferred
+     *
+     * @param float $hoursPreferred
      */
-    public function setHoursPreffered($hoursPreffered): void
+    public function setHoursPreffered($hoursPreferred): void
     {
-        $this->hoursPreffered = $hoursPreffered;
+        $this->setHoursPreferred($hoursPreferred);
     }
 
     /**
@@ -228,7 +252,7 @@ class User
      */
     public function getHoursMax(): float
     {
-        return $this->hoursMax;
+        return $this->hoursMax ? 0.0;
     }
 
     /**
@@ -308,7 +332,7 @@ class User
      */
     public function getLocations(): array
     {
-        return $this->locations;
+        return $this->locations ?? [];
     }
 
     /**
@@ -328,7 +352,7 @@ class User
      */
     public function getNotes(): string
     {
-        return $this->notes;
+        return $this->notes ?? '';
     }
 
     /**
@@ -380,5 +404,4 @@ class User
     {
         $this->password = $password;
     }
-
 }

@@ -2,6 +2,7 @@
 
 namespace MyBuilder\Library\WhenIWork\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\SerializedName;
@@ -37,14 +38,14 @@ class Position
     private $color;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("created_at")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("updated_at")
      */
@@ -133,9 +134,9 @@ class Position
     /**
      * CreatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -143,7 +144,7 @@ class Position
     /**
      * CreatedAt
      *
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
     public function setCreatedAt($createdAt): void
     {
@@ -153,9 +154,9 @@ class Position
     /**
      * UpdatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
@@ -163,13 +164,10 @@ class Position
     /**
      * UpdatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
     public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
-
-
-
 }

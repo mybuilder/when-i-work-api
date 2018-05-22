@@ -1,6 +1,7 @@
 <?php
 namespace MyBuilder\Library\WhenIWork\Model;
 
+use DateTime;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\AccessType;
 use JMS\Serializer\Annotation\SerializedName;
@@ -38,14 +39,14 @@ class Payroll
     private $creatorId;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("start_date")
      */
     private $startDate;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("end_date")
      */
@@ -75,21 +76,21 @@ class Payroll
     private $finalized;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("finalized_at")
      */
     private $finalizedAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("created_at")
      */
     private $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @Type("DateTime<'D, d F Y H:i:s O'>")
      * @SerializedName("updated_at")
      */
@@ -160,33 +161,33 @@ class Payroll
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getStartDate(): \DateTime
+    public function getStartDate(): DateTime
     {
         return $this->startDate;
     }
 
     /**
-     * @param \DateTime $startDate
+     * @param DateTime $startDate
      */
-    public function setStartDate(\DateTime $startDate): void
+    public function setStartDate(DateTime $startDate): void
     {
         $this->startDate = $startDate;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate(): DateTime
     {
         return $this->endDate;
     }
 
     /**
-     * @param \DateTime $endDate
+     * @param DateTime $endDate
      */
-    public function setEndDate(\DateTime $endDate): void
+    public function setEndDate(DateTime $endDate): void
     {
         $this->endDate = $endDate;
     }
@@ -196,7 +197,7 @@ class Payroll
      */
     public function getNotes(): string
     {
-        return $this->notes;
+        return $this->notes ?? '';
     }
 
     /**
@@ -212,7 +213,7 @@ class Payroll
      */
     public function isClosed(): bool
     {
-        return $this->closed;
+        return $this->closed ?? false;
     }
 
     /**
@@ -228,7 +229,7 @@ class Payroll
      */
     public function isFinalized(): bool
     {
-        return $this->finalized;
+        return $this->finalized ?? false;
     }
 
     /**
@@ -240,49 +241,49 @@ class Payroll
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getFinalizedAt(): \DateTime
+    public function getFinalizedAt(): ?DateTime
     {
         return $this->finalizedAt;
     }
 
     /**
-     * @param \DateTime $finalizedAt
+     * @param DateTime $finalizedAt
      */
-    public function setFinalizedAt(?\DateTime $finalizedAt): void
+    public function setFinalizedAt(?DateTime $finalizedAt): void
     {
         $this->finalizedAt = $finalizedAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param DateTime $createdAt
      */
-    public function setCreatedAt(\DateTime $createdAt): void
+    public function setCreatedAt(DateTime $createdAt): void
     {
         $this->createdAt = $createdAt;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt(): ?DateTime
     {
         return $this->updatedAt;
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      */
-    public function setUpdatedAt(\DateTime $updatedAt = null): void
+    public function setUpdatedAt(DateTime $updatedAt = null): void
     {
         $this->updatedAt = $updatedAt;
     }

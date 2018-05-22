@@ -25,7 +25,7 @@ class PositionRepository extends WhenIWorkRepository
     {
         $positionsRaw  = $this->whenIWorkApi->positionsListingPositions();
 
-        return $this->deserializeModel($positionsRaw, 'ArrayCollection<MyBuilder\Library\WhenIWork\Model\Position>');
+        return $this->deserializeModel($positionsRaw, 'ArrayCollection<'. Position::class .'>');
     }
 
 }

@@ -9,6 +9,7 @@ use MyBuilder\Library\WhenIWork\Repository\WhenIWorkRepository;
 
 /**
  * @group unit
+ * @coversDefaultClass MyBuilder\Library\WhenIWork\Repository\UserRepository
  */
 class UserRepositoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -38,7 +39,7 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function test_it_delegate_find_by_id_to_api(): void
+    public function test_it_delegates_find_by_id_to_api(): void
     {
         $user = \Mockery::mock('stdClass');
         $userRaw = \Mockery::mock('stdClass');
@@ -55,13 +56,13 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->userRepository->findById($someId);
     }
 
-    public function test_it_is_instance_of_when_i_work_repository(): void
+    public function test_it_is_an_instance_of_when_i_work_repository(): void
     {
         $this->assertInstanceOf(WhenIWorkRepository::class, $this->userRepository);
     }
 
 
-    public function test_it_delegate_find_all_to_api(): void
+    public function test_it_delegates_find_all_to_api(): void
     {
         $this->whenIWorkApi
             ->shouldReceive('usersListingUsers')
