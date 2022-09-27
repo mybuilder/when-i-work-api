@@ -287,5 +287,4 @@ class Payroll
     {
         $this->updatedAt = $updatedAt;
     }
-
 }

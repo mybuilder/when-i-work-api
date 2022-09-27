@@ -3,20 +3,21 @@
 namespace MyBuilder\Bundle\WhenIWorkBundle\Tests\Service\Repository;
 
 use JMS\Serializer\SerializerInterface;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
 use MyBuilder\Library\WhenIWork\Repository\UserRepository;
 use MyBuilder\Library\WhenIWork\Repository\WhenIWorkRepository;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @group unit
- * @coversDefaultClass MyBuilder\Library\WhenIWork\Repository\UserRepository
+ * @coversDefaultClass \MyBuilder\Library\WhenIWork\Repository\UserRepository
  */
-class UserRepositoryTest extends \PHPUnit_Framework_TestCase
+class UserRepositoryTest extends TestCase
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
+    use MockeryPHPUnitIntegration;
+
+    private UserRepository $userRepository;
 
     /**
      * @var SerializerInterface|\Mockery\MockInterface
@@ -28,7 +29,7 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
      */
     private $whenIWorkApi;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->whenIWorkApi = \Mockery::mock(WhenIWorkApi::class);
         $this->serializer = \Mockery::mock(SerializerInterface::class);
@@ -36,7 +37,6 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
             $this->whenIWorkApi,
             $this->serializer
         );
-
     }
 
     public function test_it_delegates_find_by_id_to_api(): void
@@ -60,7 +60,6 @@ class UserRepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInstanceOf(WhenIWorkRepository::class, $this->userRepository);
     }
-
 
     public function test_it_delegates_find_all_to_api(): void
     {

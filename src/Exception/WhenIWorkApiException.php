@@ -7,5 +7,4 @@ namespace MyBuilder\Library\WhenIWork\Exception;
  */
 class WhenIWorkApiException extends \RuntimeException
 {
-
 }

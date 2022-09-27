@@ -44,5 +44,4 @@ class TimeRepository extends WhenIWorkRepository
 
         return $this->deserializeModel($timesRaw, 'ArrayCollection<'. Time::class .'>');
     }
-
 }
