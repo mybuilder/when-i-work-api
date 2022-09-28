@@ -25,10 +25,7 @@ class WhenIWorkApi
 
     private $apiToken;
 
-    /**
-     * @var Client
-     */
-    private $client;
+    private Client $client;
 
     public function __construct(
         Client $client,

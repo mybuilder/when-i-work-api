@@ -27,5 +27,4 @@ class UserRepository extends WhenIWorkRepository
 
         return $this->deserializeModel($usersRaw, 'ArrayCollection<'. User::class .'>');
     }
-
 }

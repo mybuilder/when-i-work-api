@@ -6,16 +6,19 @@ use DateTime;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Mockery;
 use MyBuilder\Library\WhenIWork\Exception\WhenIWorkApiException;
 use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
 use GuzzleHttp\Psr7\Stream;
+use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * @group unit
  * @coversDefaultClass \MyBuilder\Library\WhenIWork\Service\WhenIWorkApi
  */
-class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
+class WhenIWorkApiTest extends TestCase
 {
     private const DEVELOPER_KEY = '12345';
     private const USERNAME  = 'test@test.test';
@@ -37,9 +40,9 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
      */
     private $request;
 
-    public function setUp()
+    public function setUp(): void
     {
-        $this->request = Mockery::mock('GuzzleHttp\Psr7\Message\Request');
+        $this->request = Mockery::mock(ResponseInterface::class);
         $this->guzzleClient = Mockery::mock(Client::class);
 
         $this->whenIWorkApi = new WhenIWorkApi(
@@ -60,7 +63,7 @@ class WhenIWorkApiTest extends \PHPUnit_Framework_TestCase
                 array('headers' => array('W-Token' => self::TOKEN))
             )
             ->once()
-            ->andThrow(new BadResponseException('', new Request('GET', 'foo')));
+            ->andThrow(new BadResponseException('', new Request('GET', 'foo'), new Response()));
 
         $this->expectException(WhenIWorkApiException::class);
         $this->whenIWorkApi->usersListingUsers();

@@ -495,5 +495,4 @@ class Time
     {
         $this->createdAt = $createdAt;
     }
-
 }

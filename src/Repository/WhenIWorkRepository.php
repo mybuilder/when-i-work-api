@@ -10,15 +10,8 @@ use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
 */
 abstract class WhenIWorkRepository
 {
-    /**
-     * @var WhenIWorkApi
-     */
-    protected $whenIWorkApi;
-
-    /**
-     * @var SerializerInterface
-     */
-    protected $serializer;
+    protected WhenIWorkApi $whenIWorkApi;
+    protected SerializerInterface $serializer;
 
     public function __construct(
         WhenIWorkApi $whenIWorkApi,
@@ -38,5 +31,4 @@ abstract class WhenIWorkRepository
     {
         return $this->serializer->deserialize(json_encode($data), $modelType, 'json');
     }
-
 }

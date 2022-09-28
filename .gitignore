@@ -2,5 +2,5 @@
 /bin/
 /build/
 composer.lock
-composer.json.old
 phpunit.xml
+.phpunit.result.cache

@@ -1,18 +1,24 @@
-[![Build Status](https://travis-ci.org/mybuilder/when-i-work-api.svg?branch=master)](https://travis-ci.org/mybuilder/when-i-work-api)
-
 When I Work library
 =====================
 
-This library support connection and retrieval of data from WhenIWork.com API. PHP 7.1 required.
+This library support connection and retrieval of data from WhenIWork.com API. At least PHP 7.4 is required.
 
 Docs:
 http://dev.wheniwork.com
 
 ```php
-$jmsSerializer = new JMS\Serializer\Serializer();
-$client = new GuzzleHttp\Client()
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use MyBuilder\Library\WhenIWork\Repository\PayrollRepository;
+use MyBuilder\Library\WhenIWork\Repository\UserRepository;
+use MyBuilder\Library\WhenIWork\Service\WhenIWorkApi;
+
+$serializer = JMS\Serializer\SerializerBuilder::create()->build();
+$client = new GuzzleHttp\Client();
 $whenIWorkApi = new WhenIWorkApi($client, 'your-developer-key', 'user-email', 'user-password');
-$userRepository = new Repository\WhenIWorkUserRepository($whenIWorkApi, $jmsSerializer);
+$userRepository = new UserRepository($whenIWorkApi, $serializer);
+$payrollRepository = new PayrollRepository($whenIWorkApi, $serializer);
 ```
 
 ### List of all users:
@@ -24,9 +30,8 @@ $users = $userRepository->findAll();
 ### List of all payroll periods:
 
 ```php
-$payrolls = $payrollRepository->findAll();
+$payrolls = $payrollRepository->findByPeriod();
 ```
-
 
 
 Todos:
