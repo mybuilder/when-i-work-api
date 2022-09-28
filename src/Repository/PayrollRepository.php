@@ -27,10 +27,10 @@ class PayrollRepository extends WhenIWorkRepository
      *
      * @return Payroll[]
      */
-    public function findByPeriod(\DateTimeInterface $startDate = null, \DateTimeInterface $endDate = null)
+    public function findByPeriod(\DateTimeInterface $startDate = null, \DateTimeInterface $endDate = null): array
     {
         $payrollRaw  = $this->whenIWorkApi->payrollListingPayrolls($startDate, $endDate);
 
-        return $this->deserializeModel($payrollRaw, 'ArrayCollection<'.Payroll::class.'>');
+        return $this->deserializeModel($payrollRaw, 'ArrayCollection<'.Payroll::class.'>')->toArray();
     }
 }

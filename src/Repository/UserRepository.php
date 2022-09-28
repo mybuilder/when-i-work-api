@@ -13,7 +13,7 @@ class UserRepository extends WhenIWorkRepository
      */
     public function findById($id)
     {
-        $user =  $this->whenIWorkApi->usersGetExistingUser($id);
+        $user = $this->whenIWorkApi->usersGetExistingUser($id);
 
         return $this->deserializeModel($user, User::class);
     }
@@ -21,10 +21,10 @@ class UserRepository extends WhenIWorkRepository
     /**
      * @return User[]
      */
-    public function findAll()
+    public function findAll(): array
     {
-        $usersRaw  = $this->whenIWorkApi->usersListingUsers();
+        $usersRaw = $this->whenIWorkApi->usersListingUsers();
 
-        return $this->deserializeModel($usersRaw, 'ArrayCollection<'. User::class .'>');
+        return $this->deserializeModel($usersRaw, 'ArrayCollection<'. User::class .'>')->toArray();
     }
 }

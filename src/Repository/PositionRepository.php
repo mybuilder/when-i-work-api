@@ -13,7 +13,7 @@ class PositionRepository extends WhenIWorkRepository
      */
     public function findById($positionId)
     {
-        $position =  $this->whenIWorkApi->positionsGetExistingPosition($positionId);
+        $position = $this->whenIWorkApi->positionsGetExistingPosition($positionId);
 
         return $this->deserializeModel($position, Position::class);
     }
@@ -23,9 +23,8 @@ class PositionRepository extends WhenIWorkRepository
      */
     public function findAll(): array
     {
-        $positionsRaw  = $this->whenIWorkApi->positionsListingPositions();
+        $positionsRaw = $this->whenIWorkApi->positionsListingPositions();
 
-        return $this->deserializeModel($positionsRaw, 'ArrayCollection<'. Position::class .'>');
+        return $this->deserializeModel($positionsRaw, 'ArrayCollection<'. Position::class .'>')->toArray();
     }
-
 }
